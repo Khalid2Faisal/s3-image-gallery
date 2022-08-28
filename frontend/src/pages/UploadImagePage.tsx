@@ -1,6 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+
+import imageService from "../services/imageService";
 
 export default function UploadImagePage() {
   const [file, setFile] = useState<File>();
@@ -12,9 +13,7 @@ export default function UploadImagePage() {
 
     const formData = new FormData();
     formData.append("image", file as File);
-    await axios.post("http://localhost:8000/api/images", formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    });
+    await imageService.uploadImage(formData);
 
     navigate("/");
   };

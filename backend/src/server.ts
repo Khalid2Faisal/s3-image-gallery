@@ -5,6 +5,8 @@ if (process.env.NODE_ENV !== "production") {
 
 import express, { Application } from "express";
 import cors from "cors";
+import compression from "compression";
+
 import imageRoutes from "./routes/imageRoutes";
 import connectDB from "./config/db";
 import { Database } from "./lib/types";
@@ -20,12 +22,17 @@ const mount = async (app: Application) => {
   of the request. */
   app.use(express.json());
 
+  app.use(compression());
+
   /* Telling the server to use the cors() middleware. This middleware is used to allow cross-origin requests. */
   app.use(cors());
 
   /* Telling the server to use the imageRoutes file when the server receives a request to the
   /api/images endpoint. */
   app.use("/api/images", imageRoutes);
+
+  app.use(express.static(`${__dirname}/client`));
+  app.get("/*", (_req, res) => res.sendFile(`${__dirname}/client/index.html`));
 
   /* This is the port that the server will be listening on. */
   const PORT = process.env.PORT || 8000;

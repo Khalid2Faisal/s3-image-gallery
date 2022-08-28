@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 
+import imageService from "../services/imageService";
 import SingleImage from "../components/SingleImage";
 import { Image } from "../lib/types";
 
@@ -9,15 +9,15 @@ function HomePage() {
 
   useEffect(() => {
     async function getImages() {
-      const result = await axios.get("http://localhost:8000/api/images");
-      setImages(result.data);
+      const images = await imageService.getImages();
+      setImages(images);
     }
     getImages();
   }, []);
 
   const deleteImageClicked = async ({ id }: { id: string }) => {
     console.log(`deletePostClicked = (${id})`);
-    await axios.delete("http://localhost:8000/api/images/" + id);
+    await imageService.deleteImage(id);
     setImages(images.filter((image) => image.id !== id));
   };
 
