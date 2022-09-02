@@ -1,5 +1,5 @@
 import { Disclosure } from "@headlessui/react";
-import { HiOutlineMenu, HiOutlineX } from "react-icons/hi";
+import { HiOutlineMenu, HiOutlineX, HiHome } from "react-icons/hi";
 
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(" ");
@@ -12,11 +12,11 @@ interface NavBarProps {
 
 export default function NavBar({ onHome, onNewImage }: NavBarProps) {
   const navigation = [
-    { name: "New Image", current: false, onClick: onNewImage },
+    { name: "Add Image", current: false, onClick: onNewImage },
   ];
 
   return (
-    <Disclosure as="nav" className="bg-gray-800">
+    <Disclosure as="nav" className="bg-teal-800 rounded-2xl">
       {({ open }) => (
         <>
           <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
@@ -35,7 +35,7 @@ export default function NavBar({ onHome, onNewImage }: NavBarProps) {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+              <div className="flex-1 flex items-center justify-center sm:items-stretch">
                 <button
                   onClick={onHome}
                   className="flex-shrink-0 flex items-center"
@@ -46,7 +46,7 @@ export default function NavBar({ onHome, onNewImage }: NavBarProps) {
                     alt="Workflow"
                   />
 
-                  <h1 className="text-white">Gallery</h1>
+                  <HiHome className="hidden lg:block text-white h-8 w-auto" />
                 </button>
                 <div className="hidden sm:block sm:ml-6">
                   <div className="flex space-x-4">
@@ -56,8 +56,8 @@ export default function NavBar({ onHome, onNewImage }: NavBarProps) {
                         onClick={item.onClick}
                         className={classNames(
                           item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            ? "bg-teal-900 text-white"
+                            : "text-gray-300 hover:bg-teal-700 hover:text-white",
                           "px-3 py-2 rounded-md text-sm font-medium"
                         )}
                         aria-current={item.current ? "page" : undefined}

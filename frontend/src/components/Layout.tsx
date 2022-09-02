@@ -19,8 +19,10 @@ export default function Layout() {
   };
 
   return (
-    <div>
-      <NavBar {...actions}></NavBar>
+    <div className="bg-teal-50">
+      <div className="p-2">
+        <NavBar {...actions} />
+      </div>
       <div>
         <Outlet />
       </div>
