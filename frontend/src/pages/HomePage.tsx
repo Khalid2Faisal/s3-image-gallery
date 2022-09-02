@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import imageService from "../services/imageService";
-import SingleImage from "../components/SingleImage";
+import ImageCard from "../components/ImageCard";
 import { Image } from "../lib/types";
 
 function HomePage() {
@@ -27,11 +27,9 @@ function HomePage() {
 
   return (
     <div className="App">
-      <div className="flex flex-col space-y-100 items-center divide-y">
+      <div className="columns-1 sm:columns-2 xl:columns-3 2xl:px-40 2xl:mx-auto pt-10 xl:pt-14 gap-6">
         {images.map((image, i) => (
-          <div key={i} className="px-5 py-14">
-            <SingleImage className="relative" image={image} {...postActions} />
-          </div>
+          <ImageCard key={i} image={image} {...postActions} index={i} />
         ))}
       </div>
     </div>
